@@ -359,7 +359,7 @@ def insert_tweet(connection,tweet):
                 ON CONFLICT DO NOTHING
                 ''')
             res = connection.execute(sql, {
-                'id_tweets': tweet['id']
+                'id_tweets': tweet['id'],
                 'id_users': mention['id']
                 })
 
@@ -383,7 +383,7 @@ def insert_tweet(connection,tweet):
                 ON CONFLICT DO NOTHING 
                 ''')
             res = connection.execute(sql, {
-                'id_tweets': tweet['id']
+                'id_tweets': tweet['id'],
                 'tag':tag
                 })
 
@@ -407,7 +407,7 @@ def insert_tweet(connection,tweet):
                 ON CONFLICT DO NOTHING
                 ''')
             res = connection.execute(sql, {
-                'id_tweets': tweet['id']
+                'id_tweets': tweet['id'],
                 'id_urls': id_urls,
                 'type': medium['type']
                 })
