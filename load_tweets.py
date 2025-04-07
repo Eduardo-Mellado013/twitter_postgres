@@ -103,7 +103,7 @@ def insert_tweet(connection,tweet):
 
     # insert tweet within a transaction;
     # this ensures that a tweet does not get "partially" loaded
-    self.connection.commit
+    connection.commit()
     with connection.begin() as trans:
 
         ########################################
