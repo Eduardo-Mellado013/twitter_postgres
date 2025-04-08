@@ -201,7 +201,7 @@ def insert_tweet(connection,tweet):
             text = tweet['extended_tweet']['full_text']
         except:
             text = tweet['text']
-
+        text = remove_nulls(text)
         try:
             country_code = tweet['place']['country_code'].lower()
         except TypeError:
