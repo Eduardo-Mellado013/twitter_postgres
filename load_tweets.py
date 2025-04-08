@@ -242,7 +242,7 @@ def insert_tweet(connection,tweet):
         if tweet.get('in_reply_to_user_id',None) is not None:
             sql=sqlalchemy.sql.text('''
             INSERT INTO users (id_users)
-            VALUES (:in_reply_to_user_id_
+            VALUES (:in_reply_to_user_id)
             ON CONFLICT DO NOTHING
                 ''')
             res = connection.execute(sql, {'in_reply_to_user_id': tweet['in_reply_to_user_id']})
