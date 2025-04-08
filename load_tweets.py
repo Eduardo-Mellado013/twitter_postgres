@@ -218,7 +218,7 @@ def insert_tweet(connection,tweet):
             place_name = tweet['place']['full_name']
         except TypeError:
             place_name = None
-
+        
         # NOTE:
         # The tweets table has the following foreign key:
         # > FOREIGN KEY (in_reply_to_user_id) REFERENCES users(id_users)
@@ -296,7 +296,7 @@ def insert_tweet(connection,tweet):
             'state_code': state_code,      
             'lang': tweet.get('lang'),
             'place_name': place_name,      
-            'geo': geo             
+            'geo': geo_coords             
         })
 
 
