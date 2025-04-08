@@ -340,7 +340,7 @@ def insert_tweet(connection,tweet):
 
             res = connection.execute(sql, {
                     'id_tweets': tweet['id'],
-                    'id_urls': tweet['url_id']
+                    'id_urls': id_urls
                     })
 
         ########################################
