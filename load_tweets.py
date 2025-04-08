@@ -82,8 +82,6 @@ def clean_dict(d):
     else:
         return d
 
-tweet = clean_dict(tweet)
-
 def insert_tweet(connection,tweet):
     '''
     Insert the tweet into the database.
@@ -111,6 +109,8 @@ def insert_tweet(connection,tweet):
         })
     if res.first() is not None:
         return
+    
+    tweet = clean_dict(tweet)
 
     # insert tweet within a transaction;
     # this ensures that a tweet does not get "partially" loaded
