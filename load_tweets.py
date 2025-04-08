@@ -273,7 +273,7 @@ def insert_tweet(connection,tweet):
             :state_code,
             :lang,
             :place_name,
-            ST_GeomFromText(:geo_wkt)
+            :geo
             )
             ON CONFLICT DO NOTHING
                 ''')
@@ -296,7 +296,7 @@ def insert_tweet(connection,tweet):
             'state_code': state_code,      
             'lang': tweet.get('lang'),
             'place_name': place_name,      
-            'geo_wkt': geo_wkt             
+            'geo': geo             
         })
 
 
