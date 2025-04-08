@@ -218,20 +218,21 @@ def insert_tweet(connection,tweet):
             place_name = tweet['place']['full_name']
         except TypeError:
             place_name = None
+
         try:
             coords = tweet['geo']['coordinates']
-            # For a point, create a valid WKT string.
-            geo_coords = f"POINT({coords[0]} {coords[1]})"
-        except (TypeError, KeyError):
+            wkt = f"POINT({coords[0]} {coords[1]})"
+        except (KeyError, TypeError):
             try:
-                # Build a valid POLYGON from the bounding box.
-                # We assume tweet['place']['bounding_box']['coordinates'] is a list of rings,
-                # and we take the first ring.
-                coords_list = tweet['place']['bounding_box']['coordinates'][0]
-                coords_str = ", ".join([f"{p[0]} {p[1]}" for p in coords_list])
-                geo_coords = f"POLYGON(({coords_str}))"
-            except KeyError:
-                geo_coords = None        
+                ring = tweet['place']['bounding_box']['coordinates'][0]
+                if ring[0] != ring[-1]:
+                    ring.append(ring[0])
+                ring_str = ", ".join([f"{pt[0]} {pt[1]}" for pt in ring])
+                wkt = f"POLYGON(({ring_str}))"
+            except (KeyError, TypeError):
+                wkt = None
+
+
         # NOTE:
         # The tweets table has the following foreign key:
         # > FOREIGN KEY (in_reply_to_user_id) REFERENCES users(id_users)
