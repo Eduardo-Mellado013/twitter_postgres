@@ -72,6 +72,17 @@ def get_id_urls(url, connection):
     id_urls = res[0]
     return id_urls
 
+def clean_dict(d):
+    if isinstance(d, dict):
+        return {k: clean_dict(v) for k, v in d.items()}
+    elif isinstance(d, list):
+        return [clean_dict(item) for item in d]
+    elif isinstance(d, str):
+        return d.replace('\x00', '')
+    else:
+        return d
+
+tweet = clean_dict(tweet)
 
 def insert_tweet(connection,tweet):
     '''
